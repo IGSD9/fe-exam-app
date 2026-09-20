@@ -20,6 +20,9 @@ function resolveSiteUrl() {
 
 export const SITE_URL = resolveSiteUrl();
 
+export const ADSENSE_CLIENT =
+  process.env.NEXT_PUBLIC_ADSENSE_CLIENT ?? "ca-pub-6139503169440528990";
+
 export function hasSupabaseConfig() {
   return Boolean(
     process.env.NEXT_PUBLIC_SUPABASE_URL && process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,

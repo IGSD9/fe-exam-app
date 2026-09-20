@@ -1,8 +1,9 @@
 import type { Metadata, Viewport } from "next";
 import { Noto_Sans_JP } from "next/font/google";
+import { AdSenseScript } from "@/components/ads/AdSenseScript";
 import { BottomNav } from "@/components/layout/BottomNav";
 import { ServiceWorkerRegister } from "@/components/pwa/ServiceWorkerRegister";
-import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@/lib/config";
+import { ADSENSE_CLIENT, SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@/lib/config";
 import "./globals.css";
 
 const sans = Noto_Sans_JP({
@@ -53,6 +54,9 @@ export const metadata: Metadata = {
     title: "FE過去問",
     statusBarStyle: "default",
   },
+  other: {
+    "google-adsense-account": ADSENSE_CLIENT,
+  },
 };
 
 export const viewport: Viewport = {
@@ -69,6 +73,7 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <body className={`${sans.variable} antialiased`}>
+        <AdSenseScript />
         <div className="mx-auto min-h-dvh max-w-lg">
           <ServiceWorkerRegister />
           {children}

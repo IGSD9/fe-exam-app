@@ -1,7 +1,7 @@
 # AdSense 収益化メモ（基本情報 過去問アプリ）
 
 サイト: https://fe-exam-app.vercel.app  
-Publisher: `ca-pub-6139503169440528990`
+Publisher: `ca-pub-6139553494452890`
 
 ## コード側（実装済み）
 

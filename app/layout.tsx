@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from "next";
 import { Noto_Sans_JP } from "next/font/google";
-import { AdSenseScript } from "@/components/ads/AdSenseScript";
 import { BottomNav } from "@/components/layout/BottomNav";
 import { ServiceWorkerRegister } from "@/components/pwa/ServiceWorkerRegister";
 import { ADSENSE_CLIENT, SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@/lib/config";
@@ -72,8 +71,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ja">
+      <head>
+        {/* AdSense 所有権確認用 — head 内に必須 */}
+        <script
+          async
+          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT}`}
+          crossOrigin="anonymous"
+        />
+      </head>
       <body className={`${sans.variable} antialiased`}>
-        <AdSenseScript />
         <div className="mx-auto min-h-dvh max-w-lg">
           <ServiceWorkerRegister />
           {children}

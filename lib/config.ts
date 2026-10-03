@@ -21,7 +21,7 @@ function resolveSiteUrl() {
 export const SITE_URL = resolveSiteUrl();
 
 export const ADSENSE_CLIENT =
-  process.env.NEXT_PUBLIC_ADSENSE_CLIENT ?? "ca-pub-6139503169440528990";
+  process.env.NEXT_PUBLIC_ADSENSE_CLIENT ?? "ca-pub-6139553494452890";
 
 /** AdSense ディスプレイ広告ユニット ID（未設定時は枠のみ） */
 export const ADSENSE_BANNER_SLOT =

@@ -1,10 +1,14 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ADSENSE_BANNER_SLOT, ADSENSE_CLIENT } from "@/lib/config";
+import { ensureAdSenseScript } from "@/lib/adsense-loader";
 
 type BannerAdProps = {
+  /** 無料ユーザーなど、広告を出してよい場合 */
   enabled: boolean;
+  /** 問題文・解説などパブリッシャーコンテンツが表示済みのときだけ true */
+  contentReady: boolean;
 };
 
 declare global {
@@ -13,35 +17,44 @@ declare global {
   }
 }
 
-export function BannerAd({ enabled }: BannerAdProps) {
+/**
+ * 手動配置バナー。全ページ共通スクリプトは使わず、コンテンツ表示後のみ読み込む。
+ */
+export function BannerAd({ enabled, contentReady }: BannerAdProps) {
   const pushed = useRef(false);
+  const [scriptReady, setScriptReady] = useState(false);
 
   useEffect(() => {
-    if (!enabled || !ADSENSE_CLIENT || !ADSENSE_BANNER_SLOT || pushed.current) {
+    if (!enabled || !contentReady || !ADSENSE_CLIENT || !ADSENSE_BANNER_SLOT) {
+      return;
+    }
+    let cancelled = false;
+    ensureAdSenseScript()
+      .then(() => {
+        if (!cancelled) setScriptReady(true);
+      })
+      .catch(() => {
+        /* ブロッカー等 */
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [enabled, contentReady]);
+
+  useEffect(() => {
+    if (!enabled || !contentReady || !scriptReady || !ADSENSE_BANNER_SLOT || pushed.current) {
       return;
     }
     try {
       (window.adsbygoogle = window.adsbygoogle || []).push({});
       pushed.current = true;
     } catch {
-      /* AdSense 未読込・ブロッカー時は無視 */
+      /* ignore */
     }
-  }, [enabled]);
+  }, [enabled, contentReady, scriptReady]);
 
-  if (!enabled || !ADSENSE_CLIENT) return null;
-
-  if (!ADSENSE_BANNER_SLOT) {
-    return (
-      <aside
-        className="rounded-2xl border border-dashed border-slate-200 bg-slate-50 px-4 py-3 text-center"
-        aria-hidden="true"
-      >
-        <p className="text-[11px] tracking-wide text-slate-400">AD</p>
-        <p className="mt-1 text-xs text-slate-500">
-          広告ユニット作成後に表示されます
-        </p>
-      </aside>
-    );
+  if (!enabled || !contentReady || !ADSENSE_CLIENT || !ADSENSE_BANNER_SLOT) {
+    return null;
   }
 
   return (

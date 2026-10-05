@@ -71,14 +71,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ja">
-      <head>
-        {/* AdSense 所有権確認用 — head 内に必須 */}
-        <script
-          async
-          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ADSENSE_CLIENT}`}
-          crossOrigin="anonymous"
-        />
-      </head>
       <body className={`${sans.variable} antialiased`}>
         <div className="mx-auto min-h-dvh max-w-lg">
           <ServiceWorkerRegister />

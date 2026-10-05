@@ -204,7 +204,7 @@ function QuizContent() {
               {nextId ? "次の問題" : isReview ? "復習完了" : "一覧へ戻る"}
             </button>
           ) : null}
-          <BannerAd enabled={!question.isPro} />
+          <BannerAd enabled={!question.isPro} contentReady={status === "answered"} />
         </div>
       ) : null}
     </main>

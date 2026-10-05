@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { formatYear } from "@/lib/access";
 import { SITE_DESCRIPTION, SITE_NAME } from "@/lib/config";
 import { jsonLd, listPublicCategories, listPublicSamples } from "@/lib/seo";
-import { HomeAd } from "@/components/ads/HomeAd";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { StartButton } from "@/components/home/StartButton";
 
@@ -69,7 +68,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      <HomeAd />
       <SiteFooter />
     </main>
   );

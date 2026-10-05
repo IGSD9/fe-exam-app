@@ -40,8 +40,9 @@ export default function PrivacyPage() {
         <section>
           <h2 className="font-bold text-slate-900">4. 広告</h2>
           <p className="mt-1">
-            無料プランでは広告を表示することがあります。Google AdSense 等の広告配信事業者が Cookie
-            を使用し、興味に応じた広告を表示する場合があります。広告のオプトアウトは各事業者の案内に従ってください。
+            無料プランでは、問題文と解説が表示された演習画面にのみ広告を表示することがあります。
+            ダッシュボードや読み込み中の画面など、コンテンツのない画面には広告を表示しません。
+            Google AdSense 等の広告配信事業者が Cookie を使用する場合があります。オプトアウトは各事業者の案内に従ってください。
           </p>
         </section>
         <section>
